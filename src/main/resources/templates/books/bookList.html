@@ -88,7 +88,42 @@
             background-color: #1159a7;
         }
 
+        .delete-button {
+            background-color: #008080;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #00a5a5;
+        }
+
     </style>
+
+    <script>
+        function deleteItem(itemId){
+            fetch('books/delete/' + itemId, {
+            method: 'DELETE'
+        })
+        .then(response => {
+          if (response.ok) {
+           window.location.href = '/v1/books';
+          } else {
+             window.location.href = '/v1/books'
+            throw new Error('Error deleting item');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+    </script>
 </head>
 <body>
 <h1>Book List</h1>
@@ -113,7 +148,13 @@
         <td th:text="${book.id}">123</td>
         <td th:text="${book.title}">Spring in Action</td>
         <td th:text="${book.copies}">2</td>
-        <td><a href="#" th:href="@{'/v1/books' + '/delete/' + ${book.id}}">Delete</a></td>
+        <td>
+            <button type="button" class ="delete-button"
+                    onclick="deleteItem(this.dataset.bookId)"
+                    th:attr="data-book-id=${book.id}">
+                Delete
+            </button>
+        </td>
 
     </tr>
     </tbody>

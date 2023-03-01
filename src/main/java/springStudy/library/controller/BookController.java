@@ -42,10 +42,8 @@ public class BookController {
         return "books/bookList";
     }
 
-    /*
-    Get request because delete requires a script and authorization for js
-     */
-    @GetMapping("/delete/{id}")
+
+    @DeleteMapping("/delete/{id}")
     public String deleteBook(@PathVariable String id) throws CannotDeleteForeignKeyException {
 
         bookService.deleteById(Long.valueOf(id));

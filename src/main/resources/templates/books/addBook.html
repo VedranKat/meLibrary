@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book Form</title>
+
+    <style>
+      form {
+          max-width: 500px;
+          margin: 0 auto;
+       }
+
+       label {
+          display: block;
+          margin-bottom: 10px;
+          font-weight: bold;
+       }
+
+       input[type="text"],
+       input[type="number"] {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 20px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+       }
+
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+
+</head>
+<h2>Add Book</h2>
+<body>
+<form th:action="@{/v1/books}" th:object="${bookDto}" id="add-bookDto-form" method="post">
+    <div>
+        <label>Book title:</label>
+        <input type="text" th:field="*{title}"/>
+        <label>ISBN:</label>
+        <input type="text" th:field="*{isbn}"/>
+        <label>Book number of copies:</label>
+        <input type="number" th:field="*{copies}"/>
+        <label>Publisher:</label>
+        <select th:field="*{publisher}">
+            <option th:each="publisher : ${publishers}" th:value="${publisher.id}" th:text="${publisher.name}"></option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Submit"/>
+    </div>
+</form>
+
+</body>
+</html>

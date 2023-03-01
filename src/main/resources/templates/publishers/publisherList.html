@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Library</title>
+  <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #1470bd;
+            color: white;
+        }
+        tr:nth-child(even) {background-color: #f2f2f2;}
+
+        .add-button {
+            background-color: #008080;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .add-button:hover {
+            background-color: #00a5a5;
+        }
+
+        .books-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .books-button:hover {
+            background-color: #3e8e41;
+        }
+
+        .authors-button {
+            background-color: #f57853;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .authors-button:hover {
+            background-color: #d4643f;
+        }
+
+        .publishers-button {
+            background-color: #1470bd;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .publishers-button:hover {
+            background-color: #1159a7;
+        }
+    </style>
+</head>
+<body>
+<h1>Publisher List</h1>
+
+    <a href="#" class="add-button" th:href="@{/publishers/add}">Add</a>
+    <a href="#" class="books-button" th:href="@{/v1/books}">Books</a>
+    <a href="#" class="authors-button" th:href="@{/authors}">Authors</a>
+    <a href="#" class="publishers-button" th:href="@{/publishers}">Publishers</a>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Country</th>
+    <th></th>
+  </tr>
+  <tr th:each="publisher : ${publishers}">
+    <td th:text="${publisher.id}">123</td>
+    <td th:text="${publisher.name}">Random</td>
+    <td th:text="${publisher.address}">Park Avenue</td>
+    <td th:text="${publisher.city}">Boston</td>
+    <td th:text="${publisher.country}">US</td>
+    <td><a href="#" th:href="@{'/publishers' + '/delete/' + ${publisher.id}}">Delete</a></td>
+  </tr>
+</table>
+
+</body>
+</html>

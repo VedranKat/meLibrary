@@ -15,7 +15,7 @@
             border-bottom: 1px solid #ddd;
         }
         th {
-            background-color: #4CAF50;
+            background-color: #4a3028;
             color: white;
         }
         tr:nth-child(even) {background-color: #f2f2f2;}
@@ -105,86 +105,38 @@
             background-color: #6C4A3E;
         }
 
-        .delete-button {
-            background-color: #008080;
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .delete-button:hover {
-            background-color: #00a5a5;
-        }
     </style>
 
-    <script>
-        function deleteItem(itemId){
-            fetch('books/delete/' + itemId, {
-            method: 'DELETE'
-        })
-        .then(response => {
-          if (response.ok) {
-           window.location.href = '/v1/books';
-          } else {
-             window.location.href = '/v1/books'
-            throw new Error('Error deleting item');
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
-    </script>
 </head>
 <body>
-<h1>Book List</h1>
 
-    <a href="#" class="add-button" th:href="@{/v1/books/add}">Add</a>
+<h1>Book Loans List</h1>
+
+    <a href="#" class="add-button" th:href="@{/v1/bookLoans/loan}">Loan</a>
     <a href="#" class="books-button" th:href="@{/v1/books}">Books</a>
     <a href="#" class="authors-button" th:href="@{/authors}">Authors</a>
     <a href="#" class="publishers-button" th:href="@{/publishers}">Publishers</a>
     <a href="#" class="bookLoans-button" th:href="@{/v1/bookLoans}">Book Loans</a>
 
 <table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Copies</th>
-        <th>Authors</th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    </thead>
-    <tbody>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.id}">123</td>
-        <td th:text="${book.title}">Spring in Action</td>
-        <td th:text="${book.copies}">2</td>
-        <td>
-            <span th:if="${#sets.isEmpty(book.authors)}">No authors</span>
-            <span th:each="author, iterStat : ${book.authors}">
-                <span th:text="${author.nameSurname}"></span>
-                <span th:if="${!iterStat.last}">, </span>
-            </span>
-        </td>
-        <td>
-            <button type="button" class ="delete-button"
-                    onclick="deleteItem(this.dataset.bookId)"
-                    th:attr="data-book-id=${book.id}">
-                Delete
-            </button>
-        </td>
-        <td><a href="#" th:href="@{'/v1/books' + '/edit/' + ${book.id}}">Edit</a></td>
-
-    </tr>
-    </tbody>
+        <tr>
+            <th>Book</th>
+            <th>User</th>
+            <th>Loan Date</th>
+            <th>Return Date</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="bookLoan : ${bookLoans}">
+            <td th:text="${bookLoan.book.title}"></td>
+            <td th:text="${bookLoan.username}"></td>
+            <td th:text="${bookLoan.loanDate}"></td>
+            <td th:text="${bookLoan.returnDate}"></td>
+            <td><a href="#" th:href="@{'/v1/bookLoans' + '/return/' + ${bookLoan.id}}">Return</a></td>
+            <td><a href="#" th:href="@{'/v1/bookLoans' + '/delete/' + ${bookLoan.id}}">Delete</a></td>
+        </tr>
 </table>
+
+
 </body>
 </html>

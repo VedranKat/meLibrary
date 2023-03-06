@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import springStudy.library.model.Author;
+import springStudy.library.model.BookLoan;
 import springStudy.library.model.Publisher;
 
 import java.util.HashSet;
@@ -29,6 +30,8 @@ public class BookDto {
     private Publisher publisher;
 
     private Set<Author> authors = new HashSet<>();
+
+    private Set<BookLoan> bookLoans = new HashSet<>();
 
 
     public BookDto() {

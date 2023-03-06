@@ -86,6 +86,23 @@
         .publishers-button:hover {
             background-color: #1159a7;
         }
+
+        .bookLoans-button {
+            background-color: #4a3028;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .bookLoans-button:hover {
+            background-color: #6C4A3E;
+        }
     </style>
 </head>
 <body>
@@ -95,6 +112,7 @@
     <a href="#" class="books-button" th:href="@{/v1/books}">Books</a>
     <a href="#" class="authors-button" th:href="@{/authors}">Authors</a>
     <a href="#" class="publishers-button" th:href="@{/publishers}">Publishers</a>
+    <a href="#" class="bookLoans-button" th:href="@{/v1/bookLoans}">Book Loans</a>
 
 <table>
   <tr>

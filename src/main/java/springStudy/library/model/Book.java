@@ -28,6 +28,10 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
+    @OneToMany
+    @JoinColumn(name = "book_id")
+    private Set<BookLoan> bookLoans;
+
 
     public Book() {
     }

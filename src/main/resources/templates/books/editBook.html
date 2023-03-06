@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Book Form</title>
 
-    <style>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+
+  <style>
       form {
           max-width: 500px;
           margin: 0 auto;
@@ -40,12 +41,36 @@
       input[type="submit"]:hover {
         background-color: #3e8e41;
       }
+
+      .view-button {
+            background-color: #008080;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .view-button:hover {
+            background-color: #00a5a5;
+        }
+
+        .view-button-container {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 
+
 </head>
-<h2>Add</h2>
 <body>
+<h2>Edit Book</h2>
 <form th:action="@{/v1/books}" th:object="${bookDto}" id="add-bookDto-form" method="post">
+    <input type="hidden" th:field="*{id}"/>
     <div>
         <label>Book title:</label>
         <input type="text" th:field="*{title}"/>
@@ -57,11 +82,22 @@
         <select th:field="*{publisher}">
             <option th:each="publisher : ${publishers}" th:value="${publisher.id}" th:text="${publisher.name}"></option>
         </select>
+        <div th:each="author : ${bookDto.authors}">
+            <input type="hidden" th:name="authors" th:value="${author.id}"/>
+        </div>
+        <div th:each="bookLoan : ${bookDto.bookLoans}">
+            <input type="hidden" th:name="bookLoans" th:value="${bookLoan.id}"/>
+        </div>
     </div>
     <div>
         <input type="submit" value="Submit"/>
     </div>
 </form>
 
+        <div class="view-button-container">
+            <a href="#" class="view-button" th:href="@{'/v1/books/' + ${id} + '/authors' }">View Authors</a>
+        </div>
+
 </body>
+
 </html>

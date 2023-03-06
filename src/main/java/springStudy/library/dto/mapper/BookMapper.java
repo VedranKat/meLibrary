@@ -14,4 +14,8 @@ public interface BookMapper {
     BookDto bookToBookDto(Book book);
 
     Book bookDtoToBook(BookDto bookDto);
+
+    // OVO !"#$% OD METODA TREBA IZBRISAT I REBUILDAT KAD SE PROMINI ENTITY
+    // TAKO DA SE STVORI NOVA IMPLEMENTACIJA !!!
+
 }
